@@ -27,17 +27,18 @@ contract("ElCartelElite", async() => {
     await expect(actualTotal).to.be.a.bignumber.equal(expectedTotal);
   });
 
-  it("Max Transaction : 0.003% ", async()=>{
+  it("Max Transaction : 0.003% = 3000000", async()=>{
     const elCartelElite = await ElCartelElite.deployed();
-    const expectedTotal = new BN('1000000000000000000');
-    const actualTotal = await elCartelElite.totalSupply.call();
+    const expectedTotal = new BN('3000000');
+    console.log(await elCartelElite._maxTxAmount.call());
+    const actualTotal = await elCartelElite._maxTxAmount.call() / 1000 * 3;
     await expect(actualTotal).to.be.a.bignumber.equal(expectedTotal);
   });
 
-  it("Max Wallet : 0.003%", async()=>{
+  it("Max Wallet : 0.003% = 3000000", async()=>{
     const elCartelElite = await ElCartelElite.deployed();
-    const expectedTotal = new BN('1000000000000000000');
-    const actualTotal = await elCartelElite.totalSupply.call();
+    const expectedTotal = new BN('3000000');
+    const actualTotal = await elCartelElite._maxWalletSize.call() / 1000 * 3;
     await expect(actualTotal).to.be.a.bignumber.equal(expectedTotal);
   });
 
